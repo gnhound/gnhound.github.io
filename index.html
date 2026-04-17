@@ -1,75 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <title>Don Kim</title>
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Kim Horang portfolio website — warm, calm, tiger-inspired illustration and visual storytelling."
+    />
+    <title>Kim Horang</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
-                <span>DON KIM</span>
-            </div>
-            <div class="links">
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="#">Home</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#">About</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#">Skills</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#">Services</a></div>
-                <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="#">Blogs</a></div>
-                <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="#">Contact Me</a></div>
-            </div>
-            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+
+    <style>
+      :root {
+        --color-jasmine: #f8de7e;
+        --color-ivory: #f7f1e3;
+        --color-graphite: #39393f;
+        --color-graphite-soft: rgba(57, 57, 63, 0.08);
+        --color-graphite-line: rgba(57, 57, 63, 0.14);
+        --color-surface: rgba(255, 255, 255, 0.55);
+        --shadow-soft: 0 18px 40px rgba(57, 57, 63, 0.08);
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --container: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: var(--color-graphite);
+        background:
+          radial-gradient(circle at top left, rgba(248, 222, 126, 0.24), transparent 30%),
+          linear-gradient(180deg, #fbf7ee 0%, var(--color-ivory) 100%);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      .container {
+        width: min(calc(100% - 2rem), var(--container));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 5rem 0;
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .eyebrow {
+        font-size: 0.8rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(57, 57, 63, 0.7);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(14px);
+        background: rgba(247, 241, 227, 0.78);
+        border-bottom: 1px solid var(--color-graphite-line);
+      }
+
+      .nav {
+        min-height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .brand {
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .brand span {
+        color: var(--color-graphite);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .nav-links a {
+        position: relative;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: rgba(57, 57, 63, 0.8);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.35rem;
+        width: 100%;
+        height: 2px;
+        background: var(--color-jasmine);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        background: var(--color-graphite);
+        color: var(--color-ivory);
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .nav-cta:hover,
+      .nav-cta:focus-visible,
+      .button-primary:hover,
+      .button-primary:focus-visible,
+      .button-secondary:hover,
+      .button-secondary:focus-visible,
+      .social-link:hover,
+      .social-link:focus-visible {
+        transform: translateY(-2px);
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: white;
+        color: var(--color-graphite);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .mobile-menu {
+        display: none;
+        border-top: 1px solid var(--color-graphite-line);
+        background: rgba(247, 241, 227, 0.98);
+      }
+
+      .mobile-menu[aria-hidden="false"] {
+        display: block;
+      }
+
+      .mobile-menu .container {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem 0 1.25rem;
+      }
+
+      .mobile-menu a {
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+      }
+
+      .mobile-menu a:hover,
+      .mobile-menu a:focus-visible {
+        background: rgba(57, 57, 63, 0.06);
+      }
+
+      .hero {
+        min-height: calc(100vh - 78px);
+        display: flex;
+        align-items: center;
+        padding: 4rem 0 5rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 1.4rem;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        background: rgba(248, 222, 126, 0.34);
+        border: 1px solid rgba(57, 57, 63, 0.08);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 6vw, 5.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+
+      .hero h1 .accent {
+        color: var(--color-graphite);
+        position: relative;
+        display: inline-block;
+      }
+
+      .hero h1 .accent::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0.12em;
+        width: 100%;
+        height: 0.22em;
+        background: rgba(248, 222, 126, 0.7);
+        z-index: -1;
+        border-radius: 999px;
+      }
+
+      .type-line {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        font-weight: 600;
+        color: rgba(57, 57, 63, 0.86);
+      }
+
+      .type-line .dynamic-text {
+        color: var(--color-graphite);
+        padding-left: 0.3rem;
+        border-right: 2px solid var(--color-graphite);
+        white-space: nowrap;
+        animation: blink 0.8s steps(1) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      .hero-description {
+        max-width: 58ch;
+        font-size: 1.05rem;
+        color: rgba(57, 57, 63, 0.82);
+      }
+
+      .hero-actions,
+      .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .button-primary,
+      .button-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0.95rem 1.4rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .button-primary {
+        background: var(--color-graphite);
+        color: var(--color-ivory);
+      }
+
+      .button-secondary {
+        border: 1px solid var(--color-graphite-line);
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid var(--color-graphite-line);
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+      }
+
+      .social-link:hover,
+      .social-link:focus-visible {
+        background: var(--color-jasmine);
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(57, 57, 63, 0.08);
+        border-radius: 32px;
+        padding: 1.2rem;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-image-wrap {
+        aspect-ratio: 4 / 5;
+        border-radius: 26px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(248, 222, 126, 0.35), rgba(57, 57, 63, 0.04)),
+          #efe7d3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .palette-chip {
+        position: absolute;
+        right: -1rem;
+        bottom: 2rem;
+        display: grid;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 22px;
+        background: var(--color-graphite);
+        color: var(--color-ivory);
+        box-shadow: 0 18px 40px rgba(57, 57, 63, 0.2);
+      }
+
+      .palette-chip .row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.88rem;
+      }
+
+      .swatch {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+      }
+
+      .card {
+        padding: 1.6rem;
+        border-radius: var(--radius-lg);
+        background: var(--color-surface);
+        border: 1px solid var(--color-graphite-line);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .card h3 {
+        margin-top: 0.9rem;
+        margin-bottom: 0.7rem;
+        font-size: 1.2rem;
+      }
+
+      .works-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .work-card {
+        min-height: 220px;
+        padding: 1.4rem;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--color-graphite-line);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .work-card:nth-child(odd) {
+        background: rgba(248, 222, 126, 0.48);
+      }
+
+      .work-card:nth-child(even) {
+        background: rgba(255, 255, 255, 0.58);
+      }
+
+      .color-story {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.25rem;
+        align-items: stretch;
+      }
+
+      .color-story-main {
+        padding: 2rem;
+        border-radius: 32px;
+        background: var(--color-graphite);
+        color: var(--color-ivory);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .swatch-list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .swatch-card {
+        min-height: 120px;
+        padding: 1.2rem;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .contact-panel {
+        padding: 2rem;
+        border-radius: 32px;
+        background: rgba(248, 222, 126, 0.36);
+        border: 1px solid rgba(57, 57, 63, 0.08);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .contact-email {
+        display: inline-flex;
+        margin-top: 1.25rem;
+        padding: 0.9rem 1.2rem;
+        border-radius: 999px;
+        background: var(--color-graphite);
+        color: var(--color-ivory);
+        font-weight: 600;
+      }
+
+      .site-footer {
+        padding: 2rem 0 3rem;
+        color: rgba(57, 57, 63, 0.7);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid,
+        .color-story,
+        .card-grid,
+        .works-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .palette-chip {
+          position: static;
+          margin-top: 1rem;
+          width: fit-content;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .section {
+          padding: 4rem 0;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 2.5rem;
+        }
+
+        .hero-grid,
+        .card-grid,
+        .works-grid,
+        .color-story {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-description {
+          font-size: 1rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .button-primary,
+        .button-secondary {
+          width: 100%;
+        }
+
+        .palette-chip {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a href="#home" class="brand" aria-label="Kim Horang home">
+          <span>Kim Horang</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#works">Works</a>
+          <a href="#palette">Palette</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:contact@kimhorang.com" class="nav-cta">Contact Me</a>
+        </nav>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          aria-label="Open menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="container">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#works">Works</a>
+          <a href="#palette">Palette</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:contact@kimhorang.com">Contact Me</a>
         </div>
-        <div class="dropdown">
-            <div class="links">
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Skills</a>
-                <a href="">Services</a>
-                <a href="">Blogs</a>
-                <a href="">Contact Me</a>
-                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="hero-badge" data-aos="fade-up" data-aos-duration="900">
+              Tiger-inspired visual brand
             </div>
+
+            <h1 data-aos="fade-up" data-aos-delay="100" data-aos-duration="900">
+              Warm visuals with a <span class="accent">refined calm</span>.
+            </h1>
+
+            <p class="type-line" data-aos="fade-up" data-aos-delay="180" data-aos-duration="900">
+              Kim Horang is a <span class="dynamic-text" id="dynamicText">Illustrator</span>
+            </p>
+
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="260" data-aos-duration="900">
+              A personal artist brand built around soft warmth, gentle character, and visual storytelling.
+              Inspired by tiger tones, the identity blends Jasmine, Soft Ivory, and Dark Graphite to
+              create a mood that feels artistic, grounded, and memorable.
+            </p>
+
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="340" data-aos-duration="900">
+              <a class="button-primary" href="#works">View Works</a>
+              <a class="button-secondary" href="mailto:contact@kimhorang.com">Email Inquiry</a>
+            </div>
+
+            <div class="social-links" data-aos="fade-up" data-aos-delay="420" data-aos-duration="900">
+              <a class="social-link" href="https://github.com/gnhound" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a class="social-link" href="https://www.linkedin.com/in/gnhound/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a class="social-link" href="https://x.com/gnhound" target="_blank" rel="noreferrer" aria-label="X">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="hero-card">
+              <div class="hero-image-wrap">
+                <img src="main.png" alt="Kim Horang portfolio visual" />
+              </div>
+            </div>
+
+            <div class="palette-chip" aria-label="Brand palette preview">
+              <div class="row"><span class="swatch" style="background:#F8DE7E"></span> Jasmine</div>
+              <div class="row"><span class="swatch" style="background:#F7F1E3"></span> Soft Ivory</div>
+              <div class="row"><span class="swatch" style="background:#39393F"></span> Dark Graphite</div>
+            </div>
+          </div>
         </div>
-    </nav>
-        <section>
-            <div class="main-container">
-                <div class="image" data-aos="zoom-in-right" data-aos-duration="2500">
-                    <img src="main.png" alt="">
-                </div>
-                <div class="content">
-                    <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">Hey It's <span>Don</span></h1>
-                    <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">I'm a <span></span></div>
-                    <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, perferendis quas consectetur possimus maxime consequatur cupiditate eos dolorum molestias praesentium error exercitationem rem labore illo, in dolor, odio corporis excepturi?</p>
-                    <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
-                        <a href="https://github.com/gnhound" ><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.facebook.com/gnhound/"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://www.linkedin.com/in/gnhound/"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://x.com/gnhound"><i class="fa-brands fa-x-twitter"></i></a>
-                    </div>
-                    <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
-                        <button>Download CV</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-          AOS.init({offset:0});
-        </script>
-        <script>
-            function hamburg(){
-                const navbar = document.querySelector(".dropdown")
-                navbar.style.transform = "translateY(0px)"
-            }
-            function cancel(){
-                const navbar = document.querySelector(".dropdown")
-                navbar.style.transform = "translateY(-500px)"
-            }
-        </script>
-</body>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-heading" data-aos="fade-up" data-aos-duration="900">
+            <p class="eyebrow">About</p>
+            <h2>Built around warmth, calm rhythm, and artistic identity.</h2>
+          </div>
+
+          <div class="card-grid">
+            <article class="card" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
+              <p class="eyebrow">Brand</p>
+              <h3>Soft but memorable</h3>
+              <p>
+                Kim Horang expresses tiger-inspired energy in a subtle way, focusing on warmth,
+                balance, and a refined visual tone instead of loud symbolism.
+              </p>
+            </article>
+
+            <article class="card" data-aos="fade-up" data-aos-delay="160" data-aos-duration="900">
+              <p class="eyebrow">Mood</p>
+              <h3>Warm, calm, refined</h3>
+              <p>
+                The website keeps the atmosphere clean and breathable, using soft contrast,
+                rounded surfaces, and restrained highlights to feel more like a premium artist brand.
+              </p>
+            </article>
+
+            <article class="card" data-aos="fade-up" data-aos-delay="240" data-aos-duration="900">
+              <p class="eyebrow">Direction</p>
+              <h3>Tiger-inspired color story</h3>
+              <p>
+                Jasmine suggests fur, Soft Ivory brings lightness, and Dark Graphite adds structure
+                like calm stripes. The palette carries the motif without becoming literal.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="works">
+        <div class="container">
+          <div class="section-heading" data-aos="fade-up" data-aos-duration="900">
+            <p class="eyebrow">Works</p>
+            <h2>Selected focus areas</h2>
+          </div>
+
+          <div class="works-grid">
+            <article class="work-card" data-aos="fade-up" data-aos-delay="80" data-aos-duration="900">
+              <p class="eyebrow">01</p>
+              <h3>Character Illustration</h3>
+              <p>Expressive visuals with personality, warmth, and clear silhouette language.</p>
+            </article>
+            <article class="work-card" data-aos="fade-up" data-aos-delay="140" data-aos-duration="900">
+              <p class="eyebrow">02</p>
+              <h3>Brand Visuals</h3>
+              <p>Identity-driven artwork and digital assets for a cohesive visual presence.</p>
+            </article>
+            <article class="work-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="900">
+              <p class="eyebrow">03</p>
+              <h3>Editorial-style Artwork</h3>
+              <p>Compositions with mood, narrative, and calm visual pacing.</p>
+            </article>
+            <article class="work-card" data-aos="fade-up" data-aos-delay="260" data-aos-duration="900">
+              <p class="eyebrow">04</p>
+              <h3>Instagram Storytelling</h3>
+              <p>Consistent feed visuals shaped by color harmony and brand rhythm.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="palette">
+        <div class="container color-story">
+          <div class="color-story-main" data-aos="fade-right" data-aos-duration="1000">
+            <p class="eyebrow" style="color: rgba(247,241,227,0.72)">Palette</p>
+            <h2>A tiger-inspired palette, expressed softly.</h2>
+            <p style="margin-top: 1rem; max-width: 60ch; color: rgba(247,241,227,0.86)">
+              The palette balances emotion and structure. Jasmine introduces warmth, Soft Ivory opens
+              the space, and Dark Graphite gives the brand a calm center.
+            </p>
+          </div>
+
+          <div class="swatch-list">
+            <article class="swatch-card" style="background:#F7F1E3; color:#39393F" data-aos="fade-left" data-aos-delay="80" data-aos-duration="1000">
+              <strong>Soft Ivory</strong>
+              <span>#F7F1E3</span>
+            </article>
+            <article class="swatch-card" style="background:#F8DE7E; color:#39393F" data-aos="fade-left" data-aos-delay="160" data-aos-duration="1000">
+              <strong>Jasmine</strong>
+              <span>#F8DE7E</span>
+            </article>
+            <article class="swatch-card" style="background:#39393F; color:#F7F1E3" data-aos="fade-left" data-aos-delay="240" data-aos-duration="1000">
+              <strong>Dark Graphite</strong>
+              <span>#39393F</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact-panel" data-aos="fade-up" data-aos-duration="1000">
+            <p class="eyebrow">Contact</p>
+            <h2>Let’s build a visual world with warmth and character.</h2>
+            <p style="margin-top: 1rem; max-width: 60ch">
+              For commissions, collaborations, and project inquiries, use the official Kim Horang email.
+            </p>
+            <a class="contact-email" href="mailto:contact@kimhorang.com">contact@kimhorang.com</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 Kim Horang. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        offset: 40,
+        duration: 900,
+        once: true,
+      });
+
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+
+      function toggleMenu(forceOpen) {
+        const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+        const nextState = typeof forceOpen === "boolean" ? forceOpen : !isExpanded;
+
+        menuToggle.setAttribute("aria-expanded", String(nextState));
+        mobileMenu.setAttribute("aria-hidden", String(!nextState));
+        menuToggle.innerHTML = nextState
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+      }
+
+      menuToggle.addEventListener("click", () => toggleMenu());
+      mobileLinks.forEach((link) => link.addEventListener("click", () => toggleMenu(false)));
+
+      const words = ["Illustrator", "Designer", "Visual Storyteller"];
+      const dynamicText = document.getElementById("dynamicText");
+      let wordIndex = 0;
+
+      setInterval(() => {
+        wordIndex = (wordIndex + 1) % words.length;
+        dynamicText.textContent = words[wordIndex];
+      }, 2200);
+    </script>
+  </body>
 </html>
